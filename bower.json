@@ -1,0 +1,20 @@
+{
+  "name": "omdb_api",
+  "authors": [
+    "Miroslav Vidovic <miroslav-vidovic@hotmail.com>"
+  ],
+  "description": "Display movie information using the omdb api",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}

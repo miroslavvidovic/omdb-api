@@ -3,16 +3,23 @@ function searchMovie(){
     var year = $("#year").val();
     console.log(title, year);
 
+    // Substitute whitespaces with + signs for api use
     var plusTitle = title.replace(" ", "+");
-
-    console.log(plusTitle);
 
     $.getJSON("http://www.omdbapi.com/?t="+title+"&y="+year+"&plot=full&r=json",
         function( data ) {
-            console.log(data);
+            console.log(data.Response);
+
+            // Check if the response is True and set the response ta a boolean so
+            // it can be used in mustache templates
+            if (data.Response == "True") {
+                data.Response = true;
+            } else {
+                data.Response = false;
+            }
 
             var template = $('#movie').html();
-            Mustache.parse(template);   // optional, speeds up future uses
+            Mustache.parse(template);
             var rendered = Mustache.render(template,
                 {
                     title: data.Title,
@@ -37,15 +44,6 @@ function searchMovie(){
                     response: data.Response
                 });
             $('#searchResult').html(rendered);
-            // var items = [];
-            // $.each( data, function( key, val ) {
-            //     items.push( "<li id='" + key + "'>" + val + "</li>" );
-            // });
-
-            // $( "<ul/>", {
-            //     "class": "my-new-list",
-            //     html: items.join( "" )
-            // }).appendTo( "body" );
         }
     );
 }
